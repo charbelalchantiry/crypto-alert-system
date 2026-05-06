@@ -20,10 +20,12 @@ flowchart LR
 ---
 
 ## 🧠 Key Features
+
 🔹 Real-Time Data Pipeline
-    Continuous price ingestion (BTC, ETH, XRP)
-    Reliable storage in PostgreSQL
-    Automated data flow between services
+
+-Continuous price ingestion (BTC, ETH, XRP)
+-Reliable storage in PostgreSQL
+-Automated data flow between services
 
 🔹 Intelligent Analysis Engine
     Percentage change detection
