@@ -19,7 +19,7 @@ flowchart LR
 
 ---
 
-🧠 Key Features
+##🧠 Key Features
 🔹 Real-Time Data Pipeline
     Continuous price ingestion (BTC, ETH, XRP)
     Reliable storage in PostgreSQL
@@ -47,7 +47,7 @@ flowchart LR
 
 ---
 
-🏗️ Architecture
+##🏗️ Architecture
 
 This project follows a microservices-based architecture:
 crypto-project/
@@ -59,7 +59,7 @@ crypto-project/
 
 ---
 
-⚙️ Tech Stack
+##⚙️ Tech Stack
 
 | Layer    | Technology     |
 | -------- | -------------- |
@@ -71,7 +71,7 @@ crypto-project/
 
 ---
 
-🚀 How It Works
+##🚀 How It Works
 1.Ingestion Service
     Fetches crypto prices every minute
     Stores data in PostgreSQL
@@ -87,7 +87,7 @@ crypto-project/
 
 ---
 
-🔔 Alert Logic
+##🔔 Alert Logic
     Alerts triggered when price change exceeds threshold (e.g. ±3%)
     BUY signal → price drop
     SELL signal → price spike
@@ -95,7 +95,7 @@ crypto-project/
 
 ---
 
-📈 Supported Assets
+##📈 Supported Assets
     Bitcoin (BTC)
     Ethereum (ETH)
     Ripple (XRP)
