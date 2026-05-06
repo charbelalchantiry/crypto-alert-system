@@ -23,29 +23,29 @@ flowchart LR
 
 🔹 Real-Time Data Pipeline
 
--Continuous price ingestion (BTC, ETH, XRP)
--Reliable storage in PostgreSQL
--Automated data flow between services
+- Continuous price ingestion (BTC, ETH, XRP)
+- Reliable storage in PostgreSQL
+- Automated data flow between services
 
 🔹 Intelligent Analysis Engine
-    Percentage change detection
-    Configurable alert thresholds
-    Smart alert system:
-    Cooldown mechanism
-    State tracking (prevents spam)
+- Percentage change detection
+- Configurable alert thresholds
+- Smart alert system:
+- Cooldown mechanism
+- State tracking (prevents spam)
 
 🔹 Alerting System
-    📧 Email notifications (BUY / SELL signals)
-    🔔 Real-time popup alerts (with sound)
-    📋 Persistent alert history
+- 📧 Email notifications (BUY / SELL signals)
+- 🔔 Real-time popup alerts (with sound)
+- 📋 Persistent alert history
 
 🔹 Interactive Dashboard
-    Live updating charts (AJAX)
-    Price tracking with:
-        Trend arrows (↑ ↓)
-        % change
-        Color indicators (green/red)
-    Clean UI with alert table
+- Live updating charts (AJAX)
+- Price tracking with:
+   - Trend arrows (↑ ↓)
+   - % change
+   - Color indicators (green/red)
+- Clean UI with alert table
 
 ---
 
