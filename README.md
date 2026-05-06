@@ -15,6 +15,7 @@ flowchart LR
     D -->|Save Alerts| C
     C --> F[Dashboard Service]
     F --> G[Web UI]
+```
 
 ---
 
@@ -56,7 +57,6 @@ crypto-project/
 ├── dashboard-service/     # UI + API layer
 ├── docker-compose.yml     # Orchestration
 
-
 ---
 
 ⚙️ Tech Stack
@@ -84,7 +84,6 @@ crypto-project/
     Displays live charts
     Shows alerts in real-time
     Provides API endpoints
-
 
 ---
 
