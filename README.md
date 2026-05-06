@@ -76,32 +76,33 @@ This project follows a microservices-based architecture:
 
 ## 🚀 How It Works
 1.Ingestion Service
-    Fetches crypto prices every minute
-    Stores data in PostgreSQL
+-  Fetches crypto prices every minute
+-  Stores data in PostgreSQL
 
 2.Analysis Service
-    Reads latest data
-    Calculates price changes
-    Triggers alerts based on thresholds
+-  Reads latest data
+-  Calculates price changes
+-  Triggers alerts based on thresholds
 3.Dashboard Service
-    Displays live charts
-    Shows alerts in real-time
-    Provides API endpoints
+-   Displays live charts
+-   Shows alerts in real-time
+-   Provides API endpoints
 
 ---
 
 ## 🔔 Alert Logic
-    Alerts triggered when price change exceeds threshold (e.g. ±3%)
-    BUY signal → price drop
-    SELL signal → price spike
-    Cooldown prevents repeated alerts
+
+- Alerts triggered when price change exceeds threshold (e.g. ±3%)
+- BUY signal → price drop
+- SELL signal → price spike
+- Cooldown prevents repeated alerts
 
 ---
 
 ## 📈 Supported Assets
-    Bitcoin (BTC)
-    Ethereum (ETH)
-    Ripple (XRP)
+ - Bitcoin (BTC)
+ - Ethereum (ETH)
+ - Ripple (XRP)
 
 ---
 
