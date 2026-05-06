@@ -1,0 +1,73 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: x
+      POSTGRES_DB: crypto_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  ingestion-service:
+    build: ./ingestion-service
+    container_name: ingestion-service
+    depends_on:
+      - postgres
+    restart: always
+    environment:
+      DB_HOST: postgres
+      DB_NAME: crypto_db
+      DB_USER: user
+      DB_PASSWORD: x
+
+  analysis-service:
+    build: ./analysis-service
+    container_name: analysis-service
+    depends_on:
+      - postgres
+    restart: always
+    environment:
+       DB_HOST: postgres
+       DB_NAME: crypto_db
+       DB_USER: user
+       DB_PASSWORD: x
+       EMAIL_USER: charbelchantiry@gmail.com
+       EMAIL_PASS: upbzcimdnfmzliik
+       EMAIL_TO: charbelchantiry@gmail.com
+      
+  dashboard-service:
+    build: ./dashboard-service
+    container_name: dashboard-service
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: postgres
+      DB_NAME: crypto_db
+      DB_USER: user
+      DB_PASSWORD: x
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: password@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    restart: always
+
+volumes:
+  postgres_data:
+  pgadmin_data:

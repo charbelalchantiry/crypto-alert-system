@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crypto Monitor</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: #e2e8f0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .charts {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .chart-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .coin-icon {
+            width: 20px;
+        }
+
+        .live-box {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .green { color: #22c55e; }
+        .red { color: #ef4444; }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .open {
+            background: #22c55e;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% {opacity:1;}
+            50% {opacity:0.3;}
+            100% {opacity:1;}
+        }
+
+        canvas {
+            background: #020617;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        /* TABLE */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: #0f172a;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #020617;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px;
+            border-top: 1px solid #1e293b;
+        }
+
+        tr:hover {
+            background: #020617;
+        }
+
+        .coin-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* POPUP */
+        .popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #020617;
+            border: 1px solid #1e293b;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .popup.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .popup-close {
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>📊 Real-Time Crypto Market Monitor</h1>
+
+<div class="charts">
+
+    <!-- BTC -->
+    <div class="chart-card">
+        <div class="chart-title">
+            <img class="coin-icon" src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/btc.png">
+            BTC
+
+            <div class="live-box">
+                <span id="btcArrow">→</span>
+                <span id="btcPrice" class="price">$0</span>
+                <span id="btcChange">(0%)</span>
+                <span class="status-dot open"></span>
+            </div>
+        </div>
+        <canvas id="btcChart"></canvas>
+    </div>
+
+    <!-- ETH -->
+    <div class="chart-card">
+        <div class="chart-title">
+            <img class="coin-icon" src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/eth.png">
+            ETH
+
+            <div class="live-box">
+                <span id="ethArrow">→</span>
+                <span id="ethPrice" class="price">$0</span>
+                <span id="ethChange">(0%)</span>
+                <span class="status-dot open"></span>
+            </div>
+        </div>
+        <canvas id="ethChart"></canvas>
+    </div>
+
+    <!-- XRP -->
+    <div class="chart-card">
+        <div class="chart-title">
+            <img class="coin-icon" src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/xrp.png">
+            XRP
+
+            <div class="live-box">
+                <span id="xrpArrow">→</span>
+                <span id="xrpPrice" class="price">$0</span>
+                <span id="xrpChange">(0%)</span>
+                <span class="status-dot open"></span>
+            </div>
+        </div>
+        <canvas id="xrpChart"></canvas>
+    </div>
+
+</div>
+
+<!-- 🔥 ALERT TABLE -->
+<table>
+    <tr>
+        <th>Coin</th>
+        <th>Type</th>
+        <th>Change</th>
+        <th>Message</th>
+        <th>Time</th>
+    </tr>
+
+    {% for a in alerts %}
+    <tr>
+        <td class="coin-cell">
+            <img class="coin-icon"
+                 src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/{{ a[0]|lower }}.png">
+            {{ a[0] }}
+        </td>
+
+        <td class="{% if a[1]=='BUY' %}green{% else %}red{% endif %}">
+            {{ a[1] }}
+        </td>
+
+        <td>{{ "%.2f"|format(a[2]) }}%</td>
+        <td>{{ a[3] }}</td>
+        <td>{{ a[4] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- 🔔 SOUND -->
+<audio id="alertSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"></audio>
+
+<script>
+let charts = {};
+
+function createChart(id, color) {
+    const ctx = document.getElementById(id);
+
+    charts[id] = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                data: [],
+                borderColor: color,
+                backgroundColor: color + "33",
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0
+            }]
+        },
+        options: {
+            plugins: { legend: { display: false } }
+        }
+    });
+}
+
+function update(id, coinData, priceId, changeId, arrowId) {
+    if (!charts[id] || !coinData || coinData.length < 2) return;
+
+    const prices = coinData.map(x => x[0]);
+
+    charts[id].data.labels = coinData.map(x => x[1]);
+    charts[id].data.datasets[0].data = prices;
+    charts[id].update();
+
+    const latest = prices[prices.length - 1];
+    const previous = prices[prices.length - 2];
+    const change = ((latest - previous) / previous) * 100;
+
+    const priceEl = document.getElementById(priceId);
+    const changeEl = document.getElementById(changeId);
+    const arrowEl = document.getElementById(arrowId);
+
+    priceEl.innerText = "$" + latest.toFixed(2);
+    changeEl.innerText = "(" + change.toFixed(2) + "%)";
+
+    if (change > 0) {
+        priceEl.className = "price green";
+        changeEl.className = "green";
+        arrowEl.innerText = "↑";
+        arrowEl.className = "green";
+    } else if (change < 0) {
+        priceEl.className = "price red";
+        changeEl.className = "red";
+        arrowEl.innerText = "↓";
+        arrowEl.className = "red";
+    } else {
+        arrowEl.innerText = "→";
+    }
+}
+
+// 🔔 POPUP + SOUND
+function showPopup(text) {
+    const sound = document.getElementById("alertSound");
+    sound.play();
+
+    const div = document.createElement("div");
+    div.className = "popup";
+    div.innerHTML = text + '<span class="popup-close" onclick="this.parentElement.remove()">✖</span>';
+
+    document.body.appendChild(div);
+
+    setTimeout(() => div.classList.add("show"), 10);
+    setTimeout(() => div.remove(), 4000);
+}
+
+// 🔄 DATA
+function updateCharts() {
+    fetch("/api/prices")
+        .then(res => res.json())
+        .then(data => {
+            update("btcChart", data.BTC, "btcPrice", "btcChange", "btcArrow");
+            update("ethChart", data.ETH, "ethPrice", "ethChange", "ethArrow");
+            update("xrpChart", data.XRP, "xrpPrice", "xrpChange", "xrpArrow");
+        });
+}
+
+// 🚀 INIT
+createChart("btcChart", "#f59e0b");
+createChart("ethChart", "#8b5cf6");
+createChart("xrpChart", "#06b6d4");
+
+updateCharts();
+setInterval(updateCharts, 5000);
+</script>
+
+</body>
+</html>
