@@ -52,12 +52,13 @@ flowchart LR
 ## 🏗️ Architecture
 
 This project follows a microservices-based architecture:
-crypto-project/
-│
-├── ingestion-service/     # Fetches market data
-├── analysis-service/      # Processes data & triggers alerts
-├── dashboard-service/     # UI + API layer
-├── docker-compose.yml     # Orchestration
+
+    crypto-project/
+    │
+    ├── ingestion-service/     # Fetches market data
+    ├── analysis-service/      # Processes data & triggers alerts
+    ├── dashboard-service/     # UI + API layer
+    ├── docker-compose.yml     # Orchestration
 
 ---
 
