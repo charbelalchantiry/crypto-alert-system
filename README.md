@@ -21,25 +21,25 @@ flowchart LR
 
 ## 🧠 Key Features
 
-🔹 Real-Time Data Pipeline
+## 🔹 Real-Time Data Pipeline
 
 - Continuous price ingestion (BTC, ETH, XRP)
 - Reliable storage in PostgreSQL
 - Automated data flow between services
 
-🔹 Intelligent Analysis Engine
+## 🔹 Intelligent Analysis Engine
 - Percentage change detection
 - Configurable alert thresholds
 - Smart alert system:
 - Cooldown mechanism
 - State tracking (prevents spam)
 
-🔹 Alerting System
+## 🔹 Alerting System
 - 📧 Email notifications (BUY / SELL signals)
 - 🔔 Real-time popup alerts (with sound)
 - 📋 Persistent alert history
 
-🔹 Interactive Dashboard
+## 🔹 Interactive Dashboard
 - Live updating charts (AJAX)
 - Price tracking with:
    - Trend arrows (↑ ↓)
@@ -53,12 +53,14 @@ flowchart LR
 
 This project follows a microservices-based architecture:
 
-    crypto-project/
-    │
-    ├── ingestion-service/     # Fetches market data
-    ├── analysis-service/      # Processes data & triggers alerts
-    ├── dashboard-service/     # UI + API layer
-    ├── docker-compose.yml     # Orchestration
+```text
+crypto-project/
+│
+├── ingestion-service/     
+├── analysis-service/      
+├── dashboard-service/     
+├── docker-compose.yml     
+```
 
 ---
 
@@ -75,15 +77,15 @@ This project follows a microservices-based architecture:
 ---
 
 ## 🚀 How It Works
-1.Ingestion Service
+## 1.Ingestion Service
 -  Fetches crypto prices every minute
 -  Stores data in PostgreSQL
 
-2.Analysis Service
+## 2.Analysis Service
 -  Reads latest data
 -  Calculates price changes
 -  Triggers alerts based on thresholds
-3.Dashboard Service
+## 3.Dashboard Service
 -   Displays live charts
 -   Shows alerts in real-time
 -   Provides API endpoints
@@ -115,3 +117,24 @@ This project follows a microservices-based architecture:
 
 ### 🔹 Alert Table
 ![Alert](screenshots/alert.png)
+
+
+---
+
+## 🚀 Current Release
+
+### Version 1.0
+Features included in this release:
+- Real-time crypto ingestion
+- PostgreSQL storage
+- Analysis engine
+- Email alerts
+- Live dashboard
+- Alert history
+- Dockerized architecture
+
+Future versions will introduce:
+- AI market prediction
+- Advanced analytics
+- Candlestick trading charts
+- Cloud deployment
