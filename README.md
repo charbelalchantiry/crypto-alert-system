@@ -108,8 +108,10 @@ This project follows a microservices-based architecture:
 
 ## 📷 Screenshots
 
-### 🔹 Live Dashboard
+### 🔹 Live Dashboards
 ![Dashboard](screenshots/dashboard.png)
 
-### 🔹 Alert Popup
+![Dashboard](screenshots/dashboard1.png)
+
+### 🔹 Alert Table
 ![Alert](screenshots/alert.png)

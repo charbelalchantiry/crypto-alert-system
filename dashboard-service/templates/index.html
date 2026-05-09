@@ -244,11 +244,65 @@ function createChart(id, color) {
                 backgroundColor: color + "33",
                 fill: true,
                 tension: 0.4,
-                pointRadius: 0
+                pointRadius: 0,
+                pointHoverRadius: 6,
+                pointHoverBackgroundColor: color
             }]
         },
         options: {
-            plugins: { legend: { display: false } }
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: "#0f172a",
+                    titleColor: "#ffffff",
+                    bodyColor: "#e2e8f0",
+                    borderColor: "#334155",
+                    borderWidth: 1,
+                    padding: 12,
+                    displayColors: false,
+
+                    callbacks: {
+                        label: function(context) {
+                            return "Price: $" + context.parsed.y.toLocaleString();
+                        }
+                    }
+                }
+            },
+
+            hover: {
+                mode: 'nearest',
+                intersect: false
+            },
+
+            scales: {
+                x: {
+                    ticks: {
+                        color: "#94a3b8"
+                    },
+                    grid: {
+                        color: "rgba(255,255,255,0.05)"
+                    }
+                },
+
+                y: {
+                    ticks: {
+                        color: "#94a3b8"
+                    },
+                    grid: {
+                        color: "rgba(255,255,255,0.05)"
+                    }
+                }
+            }
         }
     });
 }
